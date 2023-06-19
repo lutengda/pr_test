@@ -12,20 +12,10 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v2
 
-    - name: Get PR info
-      id: pr-info
-      run: echo "::set-output name=pr-base-repo::${{ github.event.pull_request.base.repo.full_name }}"
-
-    - name: Use PR info
-      run: echo "PR base repo is ${{ steps.pr-info.outputs.pr-base-repo }}"
-
     - name: Print comment
       run: |
-        echo "Comment content: '${{ github.event.issue.pull_request.base.repo.full_name }}'"
-
-    - name: Print source and target repository information
-      run: |
-        echo "Source repository: '${{ github.event.issue.pull_request.base.repo.full_name }}'"
+        echo "Comment content: '${{ github.event.comment.body }}'"
+        echo "Comment author: '${{ github.event.comment.user.login }}'"
 
     - uses: actions/checkout@v1
       with:
