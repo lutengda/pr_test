@@ -12,22 +12,19 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v2
 
-    - name: Print comment
+    - name: Print comment and repo
       run: |
         echo "Comment content: '${{ github.event.comment.body }}'"
         echo "Comment author: '${{ github.event.comment.user.login }}'"
-        echo "pr number: '${{ github.event.issue.pull_request }}'"
-        echo "pr number1: '${{ github.event.issue.pull_request.number }}'"
-        echo "pr number2: '${{ github.event.number }}'"
-        echo "pr number3: '${{ github.event.pull_request.number }}'"
-        echo "pr number4: '${{ github.event.issue.number }}'"
-        echo "pr number5: '${{ github.event.issue }}'"
-        echo "github_ref: '$GITHUB_REF'"
-        echo PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+        echo "pr number: '${{ github.event.issue.number }}'"
+        pr_number=${{ github.event.issue.number }}
+        source_repo=(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$pr_number|grep "full_name"|grep -v "lutengda"|awk -F':' '{print $2}'|awk -F'"' '{print $2}')
+        echo "source repo: $source_repo"
+        echo "##[set-env name=SOURCE_REPO]$source_repo"
 
     - uses: actions/checkout@v1
       with:
-        repository: highfive666/pr_test
+        repository: $SOURCE_REPO
     - name: Mirrror + trigger CI
       uses: lutengda/gitlab-mirror-and-ci-action@master
       with:
