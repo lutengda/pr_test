@@ -18,6 +18,7 @@ jobs:
         echo "Comment author: '${{ github.event.comment.user.login }}'"
         echo "pr number: '${{ github.event.issue.pull_request }}'"
         echo "pr number1: '${{ github.event.issue.pull_request.number }}'"
+        echo PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
 
     - uses: actions/checkout@v1
       with:
