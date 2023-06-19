@@ -8,7 +8,7 @@ on:
 jobs:
   print-message:
     runs-on: ubuntu-latest
-    if: ${{ github.event.issue.pull_request }} && github.event.issue_comment.body == 'begin benchmark'
+    if: ${{ github.event.issue.pull_request }} && ${{ github.event.issue_comment.body }} == 'begin benchmark'
     steps:
     - name: Print a message
       run: echo "Hello, world!1"
