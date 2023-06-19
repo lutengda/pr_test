@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PR_NUMBER: ${{ github.event.issue.number }}
-      SOURCE_REPO: $(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$pr_number | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')
+      SOURCE_REPO: ${{ curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$pr_number | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}' }}
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
