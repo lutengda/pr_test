@@ -1,4 +1,4 @@
-name: Comment Trigger
+name: Comment Trigger1
 
 on:
   issue_comment:
