@@ -1,12 +1,12 @@
-name: Comment Trigger
+name: github mirror to gitlab on pr comment
 
 on:
   issue_comment:
     types: [created]
 
 jobs:
-if: github.event.issue.pull_request && github.event.comment.body == 'begin benchmark'
-  print_comment:
+  mirror_and_comment:
+    if: github.event.issue.pull_request && github.event.comment.body == 'begin benchmark'
     runs-on: ubuntu-latest
     steps:
     - name: Check out repository
@@ -16,3 +16,20 @@ if: github.event.issue.pull_request && github.event.comment.body == 'begin bench
       run: |
         echo "Comment content: '${{ github.event.comment.body }}'"
         echo "Comment author: '${{ github.event.comment.user.login }}'"
+    
+    - uses: actions/checkout@v1
+      with:
+        repository: highfive666/pr_test
+    - name: Mirrror + trigger CI
+      uses: lutengda/gitlab-mirror-and-ci-action@master
+      with:
+        args: "http://gitlab.cnosdb.com:8280/root/pr_test"
+      env:
+        FOLLOW_TAGS: "false"
+        FORCE_PUSH: "true"
+        GITLAB_HOSTNAME: "43.247.178.238:8280"
+        GITLAB_USERNAME: "root"
+        GITLAB_PASSWORD: ${{ secrets.GITLAB_PASSWORD }}
+        GITLAB_PROJECT_ID: "18"
+        GITHUB_TOKEN: ${{ secrets.FOR_GITHUB_TOKEN }}
+    
