@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PR_NUMBER: ${{ github.event.issue.number }}
-      SOURCE_REPO: ${{ curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$pr_number | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}' }}
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
@@ -20,11 +19,12 @@ jobs:
         echo "Comment content: '${{ github.event.comment.body }}'"
         echo "Comment author: '${{ github.event.comment.user.login }}'"
         echo "pr number: $PR_NUMBER"
-        echo "source repo: $SOURCE_REPO"
+        export source_repo=$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$pr_number | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')
+        echo "source repo: $source_repo"
 
     - uses: actions/checkout@v1
       with:
-        repository: $SOURCE_REPO
+        repository: $source_repo
     - name: Mirrror + trigger CI
       uses: lutengda/gitlab-mirror-and-ci-action@master
       with:
