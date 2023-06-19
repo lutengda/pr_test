@@ -16,7 +16,11 @@ jobs:
       run: |
         echo "Comment content: '${{ github.event.comment.body }}'"
         echo "Comment author: '${{ github.event.comment.user.login }}'"
-    
+
+    - name: Print environment variables
+      run: |
+        echo ${{ toJson(env) }}
+
     - uses: actions/checkout@v1
       with:
         repository: highfive666/pr_test
