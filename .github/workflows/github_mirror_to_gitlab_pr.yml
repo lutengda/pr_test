@@ -14,8 +14,7 @@ jobs:
 
     - name: Print comment
       run: |
-        echo "Comment content: '${{ github.event.comment.body }}'"
-        echo "Comment author: '${{ github.event.comment.user.login }}'"
+        echo "Comment content: '${{ github.event.issue.pull_request.base.repo.full_name }}'"
 
     - name: Print source and target repository information
       run: |
