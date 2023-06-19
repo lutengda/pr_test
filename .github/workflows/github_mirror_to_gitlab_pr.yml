@@ -5,8 +5,8 @@ on:
     types: [created]
 
 jobs:
+if: github.event.issue.pull_request && github.event.comment.body == 'begin benchmark'
   print_comment:
-    if: github.event.issue.pull_request && github.event.comment.body == 'begin benchmark'
     runs-on: ubuntu-latest
     steps:
     - name: Check out repository
