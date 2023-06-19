@@ -24,6 +24,7 @@ jobs:
 
     - uses: actions/checkout@v1
       with:
+        shell: bash
         run: |
           source_repo="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')"
           echo "source repo: $source_repo"
