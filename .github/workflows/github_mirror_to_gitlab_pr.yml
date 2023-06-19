@@ -10,5 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.issue.pull_request }} && ${{ github.event.comment.body }} == 'begin benchmark'
     steps:
-    - name: Print a message
-      run: echo "Hello, world!"
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Print comment
+        run: echo "A new comment was added: ${{ github.event.comment.body }}"
