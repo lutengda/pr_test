@@ -15,6 +15,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Print comment and repo
+      shell: bash
       run: |
         echo "Comment content: '${{ github.event.comment.body }}'"
         echo "Comment author: '${{ github.event.comment.user.login }}'"
