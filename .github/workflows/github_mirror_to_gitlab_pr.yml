@@ -21,13 +21,13 @@ jobs:
         echo "Comment content: '${{ github.event.comment.body }}'"
         echo "Comment author: '${{ github.event.comment.user.login }}'"
         echo "pr number: $PR_NUMBER"
-        source_repo="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')"
-        echo "source repo: $source_repo"
-        echo "##[set-env name=SOURCE_REPO]$SOURCE_REPO"
 
     - uses: actions/checkout@v1
       with:
-        repository: $SOURCE_REPO
+        run: |
+          source_repo="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')"
+          echo "source repo: $source_repo"
+        repository: $source_repo
     - name: Mirrror + trigger CI
       uses: lutengda/gitlab-mirror-and-ci-action@master
       with:
