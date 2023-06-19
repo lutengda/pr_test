@@ -18,7 +18,7 @@ jobs:
 
     - name: Print source and target repository information
       run: |
-        echo "Source repository: ${{ github.event.issue.pull_request.base.repo.full_name }}
+        echo "Source repository: '${{ github.event.issue.pull_request.base.repo.full_name }}'"
 
     - uses: actions/checkout@v1
       with:
