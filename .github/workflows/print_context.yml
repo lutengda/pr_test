@@ -1,0 +1,16 @@
+name: print context
+
+on:
+  workflow_dispatch:
+
+jobs:
+  pr_commented:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print GitHub Actions context
+        run: |
+        echo "GitHub workspace: ${{ github.workspace }}"
+        echo "GitHub repository: ${{ github.repository }}"
+        echo "GitHub event name: ${{ github.event_name }}"
+        echo "GitHub ref: ${{ github.ref }}"
+        echo "GitHub sha: ${{ github.sha }}"
