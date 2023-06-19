@@ -16,6 +16,7 @@ jobs:
       run: |
         echo "Comment content: '${{ github.event.comment.body }}'"
         echo "Comment author: '${{ github.event.comment.user.login }}'"
+        echo "pr number: '$NUM'"
 
     - uses: actions/checkout@v1
       with:
