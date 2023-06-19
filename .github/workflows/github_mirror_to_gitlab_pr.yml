@@ -19,7 +19,7 @@ jobs:
         echo "Comment content: '${{ github.event.comment.body }}'"
         echo "Comment author: '${{ github.event.comment.user.login }}'"
         echo "pr number: $PR_NUMBER"
-        source_repo=$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$pr_number | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')
+        source_repo="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$pr_number | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')"
         echo "source repo: $source_repo"
 
     - uses: actions/checkout@v1
