@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PR_NUMBER: ${{ github.event.issue.number }}
+      TEST123: $(echo "Hello World" | wc -w)
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
@@ -20,7 +21,8 @@ jobs:
         echo "Comment content: '${{ github.event.comment.body }}'"
         echo "Comment author: '${{ github.event.comment.user.login }}'"
         echo "pr number: $PR_NUMBER"
-        source_repo="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$pr_number | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')"
+        echo "test123: $TEST123"
+        export source_repo="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')"
         echo "source repo: $source_repo"
 
     - uses: actions/checkout@v1
