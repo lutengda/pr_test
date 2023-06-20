@@ -19,10 +19,10 @@ jobs:
         echo "Comment content: '${{ github.event.comment.body }}'"
         echo "Comment author: '${{ github.event.comment.user.login }}'"
         echo "pr number: $PR_NUMBER"
-        source_repo="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/16|jq -r .head.repo.full_name)"
+        source_repo="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER|jq -r .head.repo.full_name)"
         echo "source_repo: $source_repo"
         echo "source_repo1=$source_repo" >> $GITHUB_OUTPUT
-        source_repo_commit_id="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/16|jq -r .head.sha|cut -c 1-7)"
+        source_repo_commit_id="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER|jq -r .head.sha|cut -c 1-7)"
         echo "source repo commit id: $source_repo_commit_id"
         echo "source_repo_commit_id1=$source_repo_commit_id" >> $GITHUB_OUTPUT
          
@@ -50,4 +50,4 @@ jobs:
         -H "Authorization: Bearer ${{ secrets.FOR_PR_COMMENT }}"\
         -H "X-GitHub-Api-Version: 2022-11-28" \
         https://api.github.com/repos/lutengda/pr_test/issues/${{ github.event.issue.number }}/comments \
-        -d '{"body":"https://cnosdb-admin.teleport.cnosdb.com/benchmark-hits/hits_f5da432.html\nhttps://cnosdb-admin.teleport.cnosdb.com/benchmark-tsbs/tsbs_f5da432.html"}'
+        -d '{"body":"https://cnosdb-admin.teleport.cnosdb.com/benchmark-hits/hits_${{ steps.set-var.outputs.source_repo_commit_id1 }}.html\nhttps://cnosdb-admin.teleport.cnosdb.com/benchmark-tsbs/tsbs_${{ steps.set-var.outputs.source_repo_commit_id1 }}.html"}'
