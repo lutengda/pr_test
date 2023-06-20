@@ -42,8 +42,6 @@ jobs:
         GITLAB_PROJECT_ID: "18"
         
     - name: Comment on PR
-      uses: JoseThen/comment-pr@v1.1.1
-      with:
-        comment: 'This PR is the bees knees!'
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
+      shell: bash
+      run: |
+        curl -X POST -H "Content-Type: application/json" -d '{"body": "This is a comment on the PR."}' "https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER/comments"
