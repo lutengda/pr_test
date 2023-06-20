@@ -24,7 +24,7 @@ jobs:
         echo "source_repo1=$source_repo" >> $GITHUB_OUTPUT
         source_repo_commit_id="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/16|jq -r .head.sha|cut -c 1-7)"
         echo "source repo commit id: $source_repo_commit_id"
-        echo "::set-output name=source_repo_commit_id1::$source_repo_commit_id"
+        echo "source_repo_commit_id1=$source_repo_commit_id" >> $GITHUB_OUTPUT
          
     - uses: actions/checkout@v1
       with:
