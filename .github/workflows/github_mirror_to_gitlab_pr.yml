@@ -25,9 +25,9 @@ jobs:
         echo "SOURCE_REPO=$source_repo" >> $GITHUB_ENV
         echo "source repo: $SOURCE_REPO"
 
-    uses: actions/checkout@v1
+    - uses: actions/checkout@v1
       with:
-        repository: $SOURCE_REPO
+        repository: $
     - name: Mirrror + trigger CI
       uses: lutengda/gitlab-mirror-and-ci-action@master
       with:
