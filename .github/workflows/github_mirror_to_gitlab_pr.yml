@@ -42,11 +42,8 @@ jobs:
         GITLAB_PROJECT_ID: "18"
         
     - name: Comment on PR
-      uses: actions/github-script@v4
+      uses: github-actions-up-and-running/pr-comment@v1.0.0
       with:
-        script: |
-          const { owner, repo } = context.repo;
-          const prNumber = ${{ github.event.issue.number }};
-          const body = "submitted a new change. Please review.";
-          await github.pulls.createReviewComment({ owner, repo, pull_number: prNumber, body });
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        message: Nice PR!👍
     
