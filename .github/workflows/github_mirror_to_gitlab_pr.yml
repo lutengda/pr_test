@@ -1,4 +1,4 @@
-name: github mirror to gitlab on pr comment123
+name: github mirror to gitlab on pr comment456
 
 on:
   issue_comment:
