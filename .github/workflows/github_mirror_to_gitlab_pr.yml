@@ -23,7 +23,7 @@ jobs:
         echo "source_repo: $source_repo"
         echo "::set-output name=source_repo1::$source_repo"
          
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v1
       with:
         repository: ${{ steps.set-var.outputs.source_repo1 }}
     - name: Mirrror + trigger CI
