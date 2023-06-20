@@ -13,18 +13,19 @@ jobs:
 
     steps:
     - name: Print comment and repo
+      id: set-var
       shell: bash
       run: |
         echo "Comment content: '${{ github.event.comment.body }}'"
         echo "Comment author: '${{ github.event.comment.user.login }}'"
         echo "pr number: $PR_NUMBER"
-
-    - run: |
-        echo "source_repo=$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')" >> $GITHUB_ENV
-        echo "source_repo: $source_repo"  
+        source_repo="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')"
+        echo "source_repo: $source_repo"
+        echo "::set-output name=source_repo1::$source_repo"
+         
     - uses: actions/checkout@master
       with:
-        repository: $source_repo
+        repository: ${{ steps.set-var.outputs.source_repo1 }}
     - name: Mirrror + trigger CI
       uses: lutengda/gitlab-mirror-and-ci-action@master
       with:
