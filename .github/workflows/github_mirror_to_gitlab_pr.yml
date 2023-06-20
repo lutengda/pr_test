@@ -46,7 +46,7 @@ jobs:
       with:
         script: |
           const { owner, repo } = context.repo;
-          const prNumber = $PR_NUMBER;
+          const prNumber = ${{ github.event.issue.number }};
           const body = "submitted a new change. Please review.";
           await github.issues.createComment({ owner, repo, issue_number: prNumber, body });
     
