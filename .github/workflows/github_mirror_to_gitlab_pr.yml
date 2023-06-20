@@ -22,6 +22,7 @@ jobs:
         source_repo="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')"
         echo "source_repo: $source_repo"
         echo "::set-output name=source_repo1::$source_repo"
+        echo "head repo commit id: '${{ github.head.sha }}'"
          
     - uses: actions/checkout@v1
       with:
