@@ -40,4 +40,13 @@ jobs:
         GITLAB_USERNAME: "root"
         GITLAB_PASSWORD: ${{ secrets.GITLAB_PASSWORD }}
         GITLAB_PROJECT_ID: "18"
+        
+    - name: Comment on PR
+      uses: actions/github-script@v4
+      with:
+        script: |
+          const { owner, repo } = context.repo;
+          const prNumber = $PR_NUMBER;
+          const body = "submitted a new change. Please review.";
+          await github.issues.createComment({ owner, repo, issue_number: prNumber, body });
     
