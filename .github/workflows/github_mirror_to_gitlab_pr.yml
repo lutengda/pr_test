@@ -44,4 +44,4 @@ jobs:
     - name: Comment on PR
       shell: bash
       run: |
-        curl -X POST -H "Content-Type: application/json" -d '{"body": "This is a comment on the PR."}' "https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER/comments"
+        curl -X POST -H "Content-Type: application/json" -d '{"body": "This is a comment on the PR."}' "https://api.github.com/repos/lutengda/pr_test/pulls/${{ github.event.issue.number }}/comments"
