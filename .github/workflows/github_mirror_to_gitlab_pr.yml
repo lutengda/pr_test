@@ -48,5 +48,5 @@ jobs:
           const { owner, repo } = context.repo;
           const prNumber = ${{ github.event.issue.number }};
           const body = "submitted a new change. Please review.";
-          await github.pulls.createReviewComment({ owner, repo, prNumber, body });
+          await github.pulls.createReviewComment({ owner, repo, pull_number: prNumber, body });
     
