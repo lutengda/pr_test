@@ -20,7 +20,7 @@ jobs:
         echo "pr number: $PR_NUMBER"
 
     - run: |
-        echo "source_repo=$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')" >> $GITHUB_ENV
+        echo "source_repo="$(curl -s https://api.github.com/repos/lutengda/pr_test/pulls/$PR_NUMBER | grep "full_name" | grep -v "lutengda" | awk -F':' '{print $2}' | awk -F'"' '{print $2}')"" >> $GITHUB_ENV
         echo "source_repo: $source_repo"  
     - uses: actions/checkout@master
       with:
