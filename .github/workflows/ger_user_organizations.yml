@@ -1,0 +1,21 @@
+name: Get User Orgs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  get-orgs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v2
+
+    - name: Get user orgs
+      id: user-orgs
+      uses: peter-evans/get-user-organizations@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        user: ${{ github.actor }}
+
+    - name: Display user orgs
+      run: echo "User orgs: ${{ steps.user-orgs.outputs.organizations }}"
