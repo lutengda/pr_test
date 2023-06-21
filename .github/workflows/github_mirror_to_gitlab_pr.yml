@@ -40,8 +40,7 @@ jobs:
       with:
         fetch-depth: 0
         repository: ${{ steps.set-var.outputs.source_repo1 }}
-        ref: ${{ steps.set-var.outputs.source_repo_branch1 }}
-        sha: ${{ steps.set-var.outputs.source_repo_full_commit_id1 }}
+        ref: refs/heads/${{ steps.set-var.outputs.source_repo_branch1 }}
     - name: Mirrror + trigger CI
       uses: lutengda/gitlab-mirror-and-ci-action@master
       with:
